@@ -36,48 +36,71 @@ export function NexusScreen({ onActivate }: { onActivate: () => void }) {
       transition={{ duration: 0.5 }}
       className="relative flex h-full w-full flex-col px-7 pb-8 pt-14"
     >
-      {/* Chronometer badge */}
-      <div className="flex items-center justify-center">
-        <div className="flex items-center gap-2.5 rounded-full frost hairline px-3.5 py-1.5">
+      {/* Editorial corner labels */}
+      <div className="flex items-start justify-between">
+        <div className="flex flex-col gap-1">
+          <span className="font-mono text-[10px] tracking-[0.22em] text-silver-faint">
+            RAPHAEL
+          </span>
+          <span className="font-mono text-[10px] tracking-[0.22em] text-silver-dim">
+            LIFE OS
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
           <span className="relative flex h-1.5 w-1.5">
             <span className="animate-breathe absolute inline-flex h-full w-full rounded-full bg-champagne" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-champagne" />
           </span>
-          <span className="font-mono text-[10.5px] tracking-[0.14em] text-silver-faint">
-            UTC+07:00 • FRI 11 SEP
+          <span className="font-mono text-[10px] tracking-[0.14em] text-silver-faint">
+            UTC+07 · FRI 11 SEP
           </span>
         </div>
       </div>
 
-      {/* Greeting */}
-      <div className="mt-14 text-center">
+      {/* Oversized editorial index */}
+      <div className="mt-10">
+        <div className="flex items-baseline gap-3">
+          <span className="font-mono text-[11px] tracking-[0.2em] text-silver-dim">
+            N°01
+          </span>
+          <span className="h-px flex-1 bg-hairline" />
+          <span className="font-mono text-[11px] tracking-[0.2em] text-silver-dim">
+            NEXUS
+          </span>
+        </div>
         <motion.h1
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.6 }}
-          className="text-balance text-[30px] font-light leading-tight tracking-tight text-silver"
+          transition={{ delay: 0.12, duration: 0.6 }}
+          className="mt-4 text-balance text-[38px] font-light leading-[0.98] tracking-[-0.03em] text-silver"
         >
-          Dòng hồi tưởng
+          Dòng
+          <br />
+          hồi tưởng
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.28, duration: 0.6 }}
-          className="mx-auto mt-3 max-w-[15rem] text-pretty text-[13px] leading-relaxed text-silver-dim"
+          transition={{ delay: 0.26, duration: 0.6 }}
+          className="mt-4 max-w-[15rem] text-pretty text-[12.5px] leading-relaxed text-silver-dim"
         >
           Chạm nhẹ để bắt đầu dòng chảy
         </motion.p>
       </div>
 
-      {/* Central orb */}
+      {/* Central wave orb */}
       <div className="flex flex-1 items-center justify-center">
         <Orb onActivate={onActivate} />
       </div>
 
       {/* Ready label */}
-      <p className="mb-6 text-center font-mono text-[10px] tracking-[0.28em] text-silver-dim/70">
-        NEXUS // STANDBY
-      </p>
+      <div className="mb-6 flex items-center gap-3">
+        <span className="h-px flex-1 bg-hairline" />
+        <p className="font-mono text-[10px] tracking-[0.28em] text-silver-dim/70">
+          NEXUS // STANDBY
+        </p>
+        <span className="h-px flex-1 bg-hairline" />
+      </div>
 
       {/* Bottom nav */}
       <div className="flex items-center justify-center">

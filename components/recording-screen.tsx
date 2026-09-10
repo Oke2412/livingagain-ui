@@ -5,6 +5,7 @@ import { motion } from 'motion/react'
 import { Check, ChevronLeft, Pause, Play } from 'lucide-react'
 import type { Space } from '@/lib/spaces'
 import { Waveform } from './waveform'
+import { WaveField } from './wave-field'
 
 function formatTime(total: number) {
   const h = Math.floor(total / 3600)
@@ -40,20 +41,29 @@ export function RecordingScreen({
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="relative flex h-full w-full flex-col px-6 pb-8 pt-14"
     >
-      {/* Caustic cocoon glow themed to card */}
+      {/* Fluid wave cocoon themed to the card */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: paused ? 0.35 : 0.7 }}
+        transition={{ duration: 0.8 }}
+      >
+        <WaveField
+          color={space.color}
+          intensity={0.85}
+          interactive
+          className="h-full w-full"
+        />
+      </motion.div>
+      {/* Fade the wave into the void at the edges */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
-          background: `radial-gradient(circle at 50% 42%, ${space.chamber}, transparent 62%)`,
+          background:
+            'radial-gradient(circle at 50% 40%, transparent 30%, rgba(5,6,8,0.55) 68%, rgba(5,6,8,0.92) 100%)',
         }}
-      />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[38%] h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[90px]"
-        style={{ background: space.glow }}
-        animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.8, 0.5] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       {/* Top status */}

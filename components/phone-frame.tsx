@@ -8,10 +8,10 @@ export function PhoneFrame({ children }: { children: ReactNode }) {
       {/* Ambient room glow behind device */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-[120px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-[130px]"
         style={{
           background:
-            'radial-gradient(circle, rgba(156,198,221,0.10), rgba(193,178,212,0.06) 45%, transparent 70%)',
+            'radial-gradient(circle, rgba(156,198,221,0.07), rgba(193,178,212,0.04) 45%, transparent 70%)',
         }}
       />
 

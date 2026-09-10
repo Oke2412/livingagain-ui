@@ -37,41 +37,32 @@ function SpaceCard({
       whileTap={{ scale: 0.96 }}
       className="group relative flex aspect-square flex-col justify-between overflow-hidden rounded-[1.4rem] frost hairline p-4 text-left outline-none"
     >
-      {/* Themed corner glow */}
+      {/* Hairline accent edge — flat, no glow bloom */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-60 blur-2xl transition-opacity group-hover:opacity-100"
-        style={{ background: space.glow }}
+        className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-40 transition-opacity group-hover:opacity-100"
+        style={{ background: space.color }}
       />
 
-      <div className="relative">
-        <div className="flex items-center justify-between">
-          <span
-            className="font-mono text-[10px] tracking-[0.14em]"
-            style={{ color: space.color }}
-          >
-            {space.index} // {space.code}
-          </span>
-          <ArrowUpRight
-            className="h-4 w-4 text-silver-dim transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            style={{ color: space.color }}
-            strokeWidth={1.5}
-          />
-        </div>
-        {/* Etched chip */}
-        <div className="mt-2 inline-flex items-center gap-1 rounded-md border border-hairline px-1.5 py-0.5">
-          <span
-            className="h-1 w-1 rounded-full"
-            style={{ background: space.color }}
-          />
-          <span className="font-mono text-[8px] tracking-[0.12em] text-silver-dim">
-            CH.0{index + 1}
-          </span>
-        </div>
+      <div className="relative flex items-start justify-between">
+        <span
+          className="font-mono text-[34px] font-light leading-none tracking-[-0.04em]"
+          style={{ color: space.color }}
+        >
+          {space.index}
+        </span>
+        <ArrowUpRight
+          className="h-4 w-4 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          style={{ color: space.color }}
+          strokeWidth={1.5}
+        />
       </div>
 
       <div className="relative">
-        <h3 className="text-[15px] font-medium leading-tight text-silver">
+        <span className="font-mono text-[9px] tracking-[0.16em] text-silver-dim">
+          {space.code}
+        </span>
+        <h3 className="mt-1.5 text-[15px] font-medium leading-tight text-silver">
           {space.title}
         </h3>
         <p className="mt-1 text-[10.5px] leading-snug text-silver-dim">

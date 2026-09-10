@@ -1,13 +1,14 @@
 'use client'
 
 import { motion } from 'motion/react'
+import { WaveField } from './wave-field'
 
 function CalibrationBezel() {
   const ticks = Array.from({ length: 72 })
   return (
     <svg
       viewBox="0 0 200 200"
-      className="animate-spin-slow absolute inset-0 h-full w-full"
+      className="animate-spin-slow pointer-events-none absolute inset-0 h-full w-full"
       aria-hidden
     >
       {ticks.map((_, i) => {
@@ -17,11 +18,11 @@ function CalibrationBezel() {
           <line
             key={i}
             x1="100"
-            y1={major ? 8 : 11}
+            y1={major ? 6 : 9}
             x2="100"
-            y2={major ? 18 : 15}
-            stroke="rgba(223,219,211,0.55)"
-            strokeWidth={major ? 1.1 : 0.6}
+            y2={major ? 14 : 12}
+            stroke="rgba(223,219,211,0.45)"
+            strokeWidth={major ? 1 : 0.5}
             transform={`rotate(${angle} 100 100)`}
           />
         )
@@ -35,58 +36,45 @@ export function Orb({ onActivate }: { onActivate: () => void }) {
     <motion.button
       type="button"
       onClick={onActivate}
-      className="relative flex h-[120px] w-[120px] items-center justify-center rounded-full outline-none"
+      className="relative flex h-[150px] w-[150px] items-center justify-center rounded-full outline-none"
       whileTap={{ scale: 0.92 }}
       transition={{ type: 'spring', stiffness: 320, damping: 18 }}
       aria-label="Bắt đầu dòng chảy hồi tưởng"
     >
-      {/* Ambient caustic mist layers */}
+      {/* Soft outer halo — kept minimal for the flat editorial canvas */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-16 rounded-full opacity-70 blur-3xl"
+        className="pointer-events-none absolute -inset-6 rounded-full opacity-50 blur-2xl"
         style={{
           background:
-            'radial-gradient(circle, rgba(156,198,221,0.28), rgba(193,178,212,0.16) 45%, transparent 72%)',
+            'radial-gradient(circle, rgba(156,198,221,0.18), transparent 70%)',
         }}
-      />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute -inset-10 rounded-full blur-2xl"
-        style={{
-          background:
-            'radial-gradient(circle, rgba(237,220,198,0.22), transparent 65%)',
-        }}
-        animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.85, 0.5] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      {/* Rotating calibration bezels */}
+      {/* Rotating calibration bezel */}
       <CalibrationBezel />
-      <div className="animate-spin-slow-reverse absolute inset-[10px] rounded-full hairline" />
 
-      {/* Glass shell */}
+      {/* Fluid distortion wave core */}
       <div
-        className="absolute inset-[16px] rounded-full frost hairline"
-        style={{ boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.08)' }}
-      />
-
-      {/* Moonstone jewel core */}
-      <motion.div
-        className="relative h-[54px] w-[54px] rounded-full"
-        animate={{ opacity: [0.82, 1, 0.82] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        style={{
-          background:
-            'radial-gradient(circle at 35% 30%, #ffffff 0%, #cfe0ea 22%, #9cc6dd 46%, #6f8ba8 70%, #2b3547 100%)',
-          boxShadow:
-            '0 0 24px 4px rgba(156,198,221,0.45), inset 0 -6px 12px rgba(0,0,0,0.4), inset 0 4px 8px rgba(255,255,255,0.5)',
-        }}
+        className="relative h-[118px] w-[118px] overflow-hidden rounded-full hairline"
+        style={{ boxShadow: 'inset 0 0 30px 4px rgba(0,0,0,0.55)' }}
       >
+        <WaveField color="#9cc6dd" intensity={1} interactive className="h-full w-full" />
+        {/* glass specular sheen */}
         <div
           aria-hidden
-          className="absolute left-[28%] top-[22%] h-3 w-3 rounded-full bg-white/80 blur-[2px]"
+          className="pointer-events-none absolute inset-0 rounded-full"
+          style={{
+            background:
+              'radial-gradient(circle at 34% 26%, rgba(255,255,255,0.32), transparent 42%)',
+          }}
         />
-      </motion.div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-full"
+          style={{ boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.12)' }}
+        />
+      </div>
     </motion.button>
   )
 }
