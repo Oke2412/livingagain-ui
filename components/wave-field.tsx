@@ -142,6 +142,9 @@ export function WaveField({
     const start = performance.now()
     let raf = 0
     let visible = true
+    // Smoothly interpolated color/intensity so space changes glide instead of snap
+    const [ir, ig, ib] = hexToRgb(colorRef.current)
+    const cur = { r: ir, g: ig, b: ib, i: intensityRef.current }
     const onVis = () => {
       visible = document.visibilityState === 'visible'
     }
@@ -160,12 +163,16 @@ export function WaveField({
       ptr.x += (ptr.tx - ptr.x) * 0.06
       ptr.y += (ptr.ty - ptr.y) * 0.06
 
-      const [r, g, b] = hexToRgb(colorRef.current)
+      const [tr, tg, tb] = hexToRgb(colorRef.current)
+      cur.r += (tr - cur.r) * 0.05
+      cur.g += (tg - cur.g) * 0.05
+      cur.b += (tb - cur.b) * 0.05
+      cur.i += (intensityRef.current - cur.i) * 0.05
       gl.uniform2f(uRes, canvas.width, canvas.height)
       gl.uniform1f(uTime, (now - start) / 1000)
       gl.uniform2f(uPointer, ptr.x, ptr.y)
-      gl.uniform3f(uColor, r, g, b)
-      gl.uniform1f(uIntensity, intensityRef.current)
+      gl.uniform3f(uColor, cur.r, cur.g, cur.b)
+      gl.uniform1f(uIntensity, cur.i)
       gl.drawArrays(gl.TRIANGLES, 0, 3)
     }
     render()

@@ -30,11 +30,11 @@ function NavPill({
 export function NexusScreen({ onActivate }: { onActivate: () => void }) {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="relative flex h-full w-full flex-col px-7 pb-8 pt-14"
+      initial={{ opacity: 0, scale: 0.985, filter: 'blur(6px)' }}
+      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+      exit={{ opacity: 0, scale: 0.985, filter: 'blur(6px)' }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="absolute inset-0 flex flex-col px-7 pb-8 pt-14"
     >
       {/* Editorial corner labels */}
       <div className="flex items-start justify-between">
